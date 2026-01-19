@@ -1,0 +1,9 @@
+.nuget/
+bin/
+obj/
+node_modules/
+venv/
+.env
+server/uploads/
+*.log
+__pycache__/
