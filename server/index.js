@@ -22,8 +22,9 @@ app.post('/api/upload', upload.single('receipt'), (req, res) => {
     const imagePath = req.file.path;
     const pythonScriptPath = path.join(__dirname, '../python_services/ocr_engine.py');
 
-    const pythonProcess = spawn('python', [pythonScriptPath, imagePath]);
-
+    const pythonExePath = path.join(__dirname, '../python_services/venv/Scripts/python.exe');
+    const pythonProcess = spawn(pythonExePath, [pythonScriptPath, imagePath]);
+    
     pythonProcess.stdout.on('data', (data) => {
         try {
             const result = JSON.parse(data.toString());
@@ -40,4 +41,4 @@ app.post('/api/upload', upload.single('receipt'), (req, res) => {
 });
 
 const PORT = 5000;
-app.listen(PORT, () => console.log(`🚀 Bridge running on http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`Bridge running on http://localhost:${PORT}`));
